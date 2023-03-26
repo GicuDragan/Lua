@@ -1,34 +1,24 @@
-local UILibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/twink"))()
+_G.FriendColor = Color3.fromRGB(0, 0, 255)
+_G.EnemyColor = Color3.fromRGB(255, 0, 0)
+_G.UseTeamColor = false
+-- Colors --
 
-local MainUI = UILibrary.Load("Lifting Simulator By Luci.#0069")
-local FirstPage = MainUI.AddPage("Main")
-local SecondPage = MainUI.AddPage("Discord")
-
-
-SecondPage.AddToggle("https://discord.gg/kFUDWPPd6r")
-SecondPage.AddToggle("irafhahell1")
-SecondPage.AddToggle("addrian_dacap")
-FirstPage.AddToggle("Luci058 - Owner")
-
-FirstPage.AddToggle("Auto Muscle", false, function(Value)
-toggle = Value
-while toggle do wait()
-local ohTable1 = {
-	[1] = "GainMuscle"
-}
-game:GetService("ReplicatedStorage").RemoteEvent:FireServer(ohTable1)
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Highlight = Instance.new("Highlight")
+Highlight.Name = "Highlight"
+function ApplyToCurrentPlayers()
+    for i,player in pairs(Players:GetChildren()) do 
+        repeat wait() until player.Character
+        if not player.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+            local HighlightClone = Highlight:Clone()
+            HighlightClone.Adornee = player.Character
+            HighlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
+            HighlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+            HighlightClone.Name = "Highlight"
+        end
     end
-end)
-FirstPage.AddToggle("Auto Sell", false, function(Value)
-    tog = Value
-   while tog do wait()
-local ohTable1 = {
-	[1] = "SellMuscle"
-}
-
-game:GetService("ReplicatedStorage").RemoteEvent:FireServer(ohTable1)
-    end
-end)
-FirstPage.AddButton("Bring up the Buy Menu", function()
-    game:GetService("Players").LocalPlayer.PlayerGui["Main_Gui"]["UpgradeMenu_Frame"].Visible = true
+end 
+RunService.Heartbeat:Connect(function()
+    ApplyToCurrentPlayers()
 end)
