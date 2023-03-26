@@ -1,8 +1,6 @@
 _G.FriendColor = Color3.fromRGB(0, 0, 255)
 _G.EnemyColor = Color3.fromRGB(255, 0, 0)
-_G.UseTeamColor = false
--- Colors --
-
+_G.UseTeamColor = true
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local Highlight = Instance.new("Highlight")
